@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Recycling App</string>
+    <string name="recyclable_or_not_recyclable">Recyclable or Not Recyclable</string>
+    <string name="todo">TODO</string>
 </resources>
