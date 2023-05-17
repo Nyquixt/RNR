@@ -5,10 +5,12 @@ plugins {
 android {
     namespace 'com.example.recyclingapp'
     compileSdk 32
+    useLibrary  'org.apache.http.legacy'
+
 
     defaultConfig {
         applicationId "com.example.recyclingapp"
-        minSdk 21
+        minSdk 26
         targetSdk 32
         versionCode 1
         versionName "1.0"
@@ -26,6 +28,11 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    packagingOptions {
+        resources.excludes.add("META-INF/*")
+    }
+
 }
 
 dependencies {
@@ -36,4 +43,5 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
+    api 'com.github.ok2c.hc4.android:httpclient-android:0.1.0'
 }
