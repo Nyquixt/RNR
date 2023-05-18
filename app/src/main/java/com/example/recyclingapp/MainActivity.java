@@ -100,10 +100,11 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case "glass":
                 case "metal":
-                case "paper":
                 case "plastic":
                     recyclingInfo = "Recyclable: Clean, dry off and place in bin";
                     break;
+                case "paper":
+                    recyclingInfo = "Recyclable: Place in bin";
                 case "medical":
                     recyclingInfo = "Not Recyclable: Dispose at hospital";
                     break;
