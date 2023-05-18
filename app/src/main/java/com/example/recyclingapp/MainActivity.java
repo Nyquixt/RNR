@@ -36,7 +36,10 @@ public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_CODE2 = 17;
 
     //server address
-    private static final String SERVER_ADDRESS = "http://10.0.2.2:5000/predict";
+    //emulator:
+    //private static final String SERVER_ADDRESS = "http://10.0.2.2:5000/predict";
+    //physical phone: usb debugging run "adb reverse tcp:3333 tcp:5000"
+    private static final String SERVER_ADDRESS = "http://127.0.0.1:3333/predict";
 
     ImageButton cameraButton;
     ImageView imageView;
@@ -86,10 +89,37 @@ public class MainActivity extends AppCompatActivity {
             this.name = name;
         }
 
+        public String getRecyclingInfo(String trashClass){
+            String recyclingInfo = "";
+            switch(trashClass){
+                case "cardboard":
+                    recyclingInfo = "Recyclable: Fold and place in bin";
+                    break;
+                case "e-waste":
+                    recyclingInfo = "Not Recyclable: Bring to e-waste disposal facility";
+                    break;
+                case "glass":
+                case "metal":
+                case "paper":
+                case "plastic":
+                    recyclingInfo = "Recyclable: Clean, dry off and place in bin";
+                    break;
+                case "medical":
+                    recyclingInfo = "Not Recyclable: Dispose at hospital";
+                    break;
+                default:
+                    break;
+            }
+            return recyclingInfo;
+        }
+
         public void displayResponse(String response) {
-            textView = findViewById(R.id.resultText);
             String []splitterString=response.split("\"");
-            textView.setText(splitterString[3]);
+            response = splitterString[3].trim();
+            response = response + "\n" + getRecyclingInfo(response);
+
+            textView = findViewById(R.id.resultText);
+            textView.setText(response);
         }
 
         @Override
@@ -137,4 +167,3 @@ public class MainActivity extends AppCompatActivity {
         return httpRequestParams;
     }
 }
-
